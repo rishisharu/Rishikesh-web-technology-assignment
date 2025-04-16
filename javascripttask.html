@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Student Details Form</title>
+<style>
+  table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+</style>
+</head>
+<body>
+
+<h2>Student Details Form</h2>
+
+<form id="studentForm">
+  <label for="name">Name:</label><br>
+  <input type="text" id="name" name="name"><br><br>
+
+  <label for="degree">Degree:</label><br>
+  <input type="text" id="degree" name="degree"><br><br>
+
+  <label for="batch">Batch Passed Out:</label><br>
+  <input type="number" id="batch" name="batch"><br><br>
+
+  <label for="linkedin">LinkedIn Profile:</label><br>
+  <input type="url" id="linkedin" name="linkedin"><br><br>
+
+  <label for="phone">Phone No:</label><br>
+  <input type="tel" id="phone" name="phone"><br><br>
+
+  <label for="email">Mail ID:</label><br>
+  <input type="email" id="email" name="email"><br><br>
+
+  <button type="button" onclick="addStudent()">Submit</button>
+</form>
+
+<br>
+
+<h2>Student Details</h2>
+
+<table id="studentTable">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Degree</th>
+      <th>Batch Passed Out</th>
+      <th>LinkedIn Profile</th>
+      <th>Phone No</th>
+      <th>Mail ID</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+<script>
+  function addStudent() {
+    const name = document.getElementById("name").value;
+    const degree = document.getElementById("degree").value;
+    const batch = parseInt(document.getElementById("batch").value);
+    const linkedin = document.getElementById("linkedin").value;
+    const phone = document.getElementById("phone").value;
+    const email = document.getElementById("email").value;
+
+    const currentYear = new Date().getFullYear(); // Get the current year
+    const status = (batch === currentYear || batch === currentYear - 1) ? "Active" : "Inactive";
+
+    const table = document.getElementById("studentTable").getElementsByTagName('tbody')[0];
+    const newRow = table.insertRow(table.rows.length);
+
+    const cell1 = newRow.insertCell(0);
+    const cell2 = newRow.insertCell(1);
+    const cell3 = newRow.insertCell(2);
+    const cell4 = newRow.insertCell(3);
+    const cell5 = newRow.insertCell(4);
+    const cell6 = newRow.insertCell(5);
+    const cell7 = newRow.insertCell(6);
+
+    cell1.innerHTML = name;
+    cell2.innerHTML = degree;
+    cell3.innerHTML = batch;
+    cell4.innerHTML = `<a href="${linkedin}" target="_blank">Link</a>`;
+    cell5.innerHTML = phone;
+    cell6.innerHTML = email;
+    cell7.innerHTML = status; // Set the status based on the logic
+
+    // Clear the form fields
+    document.getElementById("studentForm").reset();
+  }
+</script>
+
+</body>
+</html>
